@@ -1,0 +1,20 @@
+version: "2"
+services:
+
+ routeros:
+    image: mkv28/mikrotik-routeros:latest
+    restart: unless-stopped
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    ports:
+      - "2222:22"
+      - "2223:23"
+      - "7777:80"
+      - "8728:8728"
+      - "8729:8729"
+      - "28728:8728"
+      - "28729:8729"
+      - "8291:8291"

@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+    es1:
+        image: elasticsearch:8.2.3
+        container_name: es1
+        hostname: es1
+        restart: always
+        ports:
+            - '9200:9200'
+            - '9300:9300'
+        environment:
+            - discovery.type=single-node
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        networks:
+            - elasticsearch-default-network
+        volumes:
+            - elasticsearch-default-volume:/usr/share/elasticsearch/data
+
+    kibana-default:
+        image: kibana:8.2.3
+        container_name: kibana-default
+        hostname: kibana-default
+        restart: always
+        depends_on:
+            - es1
+        ports:
+            - '5601:5601'
+        environment:
+            - ELASTICSEARCH_HOSTS=http://es1:9200
+        networks:
+            - elasticsearch-default-network
+
+networks:
+    elasticsearch-default-network:
+        driver: bridge
+
+volumes:
+    elasticsearch-default-volume:
+        driver: local

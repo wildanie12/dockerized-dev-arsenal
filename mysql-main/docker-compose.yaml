@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    mysql:
+        image: 'mysql:8.0'
+        container_name: mysql_main
+        hostname: mysql_main
+        ports:
+            - '3306:3306'
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+        volumes:
+            - $PWD/data:/var/lib/mysql
+        networks:
+            - bmu_network_dev
+
+networks:
+    bmu_network_dev:
+        external: true
+        name: bmu_network_dev

@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+    influxdb-default:
+        image: influxdb:latest
+        container_name: influxdb-default
+        hostname: influxdb
+        ports:
+            - "8086:8086"
+        volumes:
+            - /var/lib/influxdb
+        environment:
+            - name=value
+            - DOCKER_INFLUXDB_INIT_USERNAME=root
+            - DOCKER_INFLUXDB_INIT_PASSWORD=root
+            - DOCKER_INFLUXDB_INIT_ORG=wildani
+            - DOCKER_INFLUXDB_INIT_BUCKET=admin
+        networks:
+            - influxdb_network
+
+networks:
+    influxdb_network:
+        name: influxdb_network
+        driver: bridge

@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  grafana-main:
+    image: grafana/grafana-enterprise
+    container_name: grafana-main
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    name: monitoring-main
+    driver: bridge
+    external: true

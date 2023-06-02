@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+    mongo-default:
+        image: mongo:latest
+        container_name: mongo-main
+        domainname: mongo-main
+        ports:
+            - '27017:27017'
+        environment:
+            - MONGO_INITDB_DATABASE=first

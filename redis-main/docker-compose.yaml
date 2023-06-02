@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  redis-main:
+    image: redis:7.0-alpine
+    container_name: redis-main
+    hostname: redis-main
+    ports:
+      - "6379:6379"

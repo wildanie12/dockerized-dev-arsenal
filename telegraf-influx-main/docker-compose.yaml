@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  telegraf-default:
+    container_name: telegraf-default
+    image: telegraf:alpine
+    ports:
+      - "8094:8094"
+    networks:
+      - influxdb_network
+    volumes:
+      - $PWD/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+networks:
+  influxdb_network:
+    name: influxdb_network
+    external: true

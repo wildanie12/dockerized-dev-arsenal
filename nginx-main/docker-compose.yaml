@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  nginx-main:
+    image: nginx:latest
+    container_name: nginx-main
+    hostname: nginx-main
+    ports:
+      - "8080:80"
+      - "8888:8888"
+    volumes:
+      - ./templates:/etc/nginx/templates
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/conf.d:/etc/nginx/conf.d
+      - ./www:/home/wildani/www
+      - ./static:/home/wildani/static
+    environment:
+      - NGINX_HOST=nginx-main.test
+      - NGINX_PORT=80
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    name: main-network
+    driver: brigde
+    external: true
